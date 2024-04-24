@@ -7,6 +7,23 @@
 <body>
   <script>
     // Your JavaScript goes here!
+    //1. write a function called getComputerChoice that randomly returns rock, paper, or scissors as a string.
+    const choices = ["Rock" , "Paper" , "Scissors"];
+
+    function getComputerChoice() {
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        
+        let computerChoice = choices[getRandomInt(3)];
+        console.log(computerChoice);
+    }
+
+    getComputerChoice();
+     
+    //2. write a function called getHumanChoice that will return a valid option based on the user's choice.
+    //3. Declare the player's score variables
+    //4. Write the logic to play a single round
     console.log("Hello, World!")
   </script>
 </body>
