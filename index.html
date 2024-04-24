@@ -6,24 +6,47 @@
 </head>
 <body>
   <script>
-    // Your JavaScript goes here!
     //1. write a function called getComputerChoice that randomly returns rock, paper, or scissors as a string.
-    const choices = ["Rock" , "Paper" , "Scissors"];
-
     function getComputerChoice() {
+        const choices = ["rock" , "paper" , "scissors"];
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
         
         let computerChoice = choices[getRandomInt(3)];
-        console.log(computerChoice);
+        console.log("Your opponent goes " + computerChoice);
     }
-
-    getComputerChoice();
      
     //2. write a function called getHumanChoice that will return a valid option based on the user's choice.
+    function getHumanChoice() {
+        let humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.")
+        console.log("You go " + humanChoice.toLowerCase());
+    }
     //3. Declare the player's score variables
+    let humanScore = 0;
+    let computerScore = 0;
     //4. Write the logic to play a single round
+    function playRound(humanChoice , computerChoice) {
+        if (humanChoice = computerChoice) {
+            console.log("TIE!");
+        }
+        else if (humanChoice = "rock") {
+            if (computerChoice = "scissors") {
+                humanScore++;
+                console.log("You win! Rock beats scissors!")
+            }
+            else if (computerChoice = "paper") {
+                computerScore ++;
+                console.log("You lose! Paper beats rock!")
+            }
+        }
+        //!!!
+    }
+
+    getHumanChoice();
+    getComputerChoice();
+    playRound();
+    console.log("You: " + humanScore + ", Computer: " + computerScore);
     console.log("Hello, World!")
   </script>
 </body>
