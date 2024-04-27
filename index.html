@@ -6,48 +6,93 @@
 </head>
 <body>
   <script>
-    //1. write a function called getComputerChoice that randomly returns rock, paper, or scissors as a string.
+
+    let humanChoice;
+    let computerChoice;
+    let humanScore = 0;
+    let computerScore = 0;
+
+    playGame();
+    repeat(playGame , 4);
+
+    function getHumanChoice() {
+        humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.").toLowerCase()
+        if (humanChoice === "rock") {
+            console.log("You throw " + humanChoice + ", the correct choice.")
+        } else if (humanChoice === "paper") {
+            console.log("You throw " + humanChoice + ", you filth.")
+        } else if (humanChoice === "scissors") {
+            console.log("You throw " + humanChoice + ".")
+        } else if (humanChoice === "gun") {
+            console.log("Not today you cheating slime.")
+        } else {
+            console.log("Nope. Gotta write 'rock', 'paper', or 'scissors'. Try again.")
+        }
+        return humanChoice;
+    }
+   
     function getComputerChoice() {
         const choices = ["rock" , "paper" , "scissors"];
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
         
-        let computerChoice = choices[getRandomInt(3)];
-        console.log("Your opponent goes " + computerChoice);
-    }
-     
-    //2. write a function called getHumanChoice that will return a valid option based on the user's choice.
-    function getHumanChoice() {
-        let humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.")
-        console.log("You go " + humanChoice.toLowerCase());
-    }
-    //3. Declare the player's score variables
-    let humanScore = 0;
-    let computerScore = 0;
-    //4. Write the logic to play a single round
-    function playRound(humanChoice , computerChoice) {
-        if (humanChoice = computerChoice) {
-            console.log("TIE!");
-        }
-        else if (humanChoice = "rock") {
-            if (computerChoice = "scissors") {
-                humanScore++;
-                console.log("You win! Rock beats scissors!")
-            }
-            else if (computerChoice = "paper") {
-                computerScore ++;
-                console.log("You lose! Paper beats rock!")
-            }
-        }
-        //!!!
+        computerChoice = choices[getRandomInt(3)];
+        console.log("Your opponent throw " + computerChoice);
+        return computerChoice;
     }
 
-    getHumanChoice();
-    getComputerChoice();
-    playRound();
-    console.log("You: " + humanScore + ", Computer: " + computerScore);
-    console.log("Hello, World!")
+    function playGame() {
+        getHumanChoice();
+        getComputerChoice();
+        playRound(humanChoice , computerChoice);
+    }
+
+    function repeat(func , times) {
+        func();
+        times && --times && repeat (func , times);
+    }
+     
+    function playRound(humanChoice , computerChoice) {
+        if(humanChoice === "rock") {
+            if (computerChoice === "rock") {
+                humanScore++;
+                computerScore++;
+                console.log("Kings, the both of you.")
+            } else if (computerChoice === "scissors") {
+                humanScore++;
+                console.log("You win. As you should.")
+            } else if (computerChoice === "paper") {
+                computerScore ++;
+                console.log("You die with your honor.")
+            }
+        } else if (humanChoice === "paper") {
+            if (computerChoice === "paper") {
+                humanScore--;
+                computerScore--;
+                console.log("You rats. You deserve each other.")
+            } else if (computerChoice === "rock") {
+                humanScore++;
+                console.log("Take your victory, and live as a coward.")
+            } else if (computerChoice === "scissors") {
+                computerScore++;
+                console.log("It's no more than you deserve.")
+            }
+        } else if (humanChoice === "scissors") {
+            if (computerChoice === "scissors") {
+                console.log("You tie.")
+            }
+            if (computerChoice === "paper") {
+                humanScore++;
+                console.log("Another one bites the dust.")
+            } else if (computerChoice === "rock") {
+                computerScore++;
+                console.log("You fool. Rock reigns supreme.")
+            }
+        }
+
+        console.log("You: " + humanScore + ", Computer: " + computerScore)
+    }
   </script>
 </body>
 </html>
