@@ -5,18 +5,30 @@
   <title>Page Title</title>
 </head>
 <body>
+  <button id="rock">ROCK</button>
+  <button id="paper">PAPER</button>
+  <button id="scissors">SCISSORS</button>
   <script>
 
+    let selection;
     let humanChoice;
     let computerChoice;
     let humanScore = 0;
     let computerScore = 0;
 
-    playGame();
-    repeat(playGame , 4);
+    const rockButton = document.querySelector('#rock');
+    const paperButton = document.querySelector('#paper');
+    const scissorsButton = document.querySelector('#scissors');
+
+    //playGame();
+    //repeat(playGame , 4);
+
+    rockButton.addEventListener('click', () => playGame("rock"));
+    paperButton.addEventListener('click', () => playGame("paper"));
+    scissorsButton.addEventListener('click', () => playGame("scissors"));
 
     function getHumanChoice() {
-        humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.").toLowerCase()
+        //humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.").toLowerCase()
         if (humanChoice === "rock") {
             console.log("You throw " + humanChoice + ", the correct choice.")
         } else if (humanChoice === "paper") {
@@ -38,11 +50,12 @@
         }
         
         computerChoice = choices[getRandomInt(3)];
-        console.log("Your opponent throw " + computerChoice);
+        console.log("Your opponent throws " + computerChoice);
         return computerChoice;
     }
 
-    function playGame() {
+    function playGame(string) {
+        humanChoice = string;
         getHumanChoice();
         getComputerChoice();
         playRound(humanChoice , computerChoice);
