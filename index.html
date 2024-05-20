@@ -8,6 +8,11 @@
   <button id="rock">ROCK</button>
   <button id="paper">PAPER</button>
   <button id="scissors">SCISSORS</button>
+  <div id="playerText"></div>
+  <div id="oppText"></div>
+  <div id="result"></div>
+  <div id="score"></div>
+  <div id="winner"></div>
   <script>
 
     let selection;
@@ -30,15 +35,15 @@
     function getHumanChoice() {
         //humanChoice = prompt("Welcome to Rock, Paper, Scissors! Prepare to win or lose entirely by chance! Please enter 'Rock', 'Paper', or 'Scissors'.").toLowerCase()
         if (humanChoice === "rock") {
-            console.log("You throw " + humanChoice + ", the correct choice.")
+            document.getElementById("playerText").innerHTML = ("You throw " + humanChoice + ", the correct choice.")
         } else if (humanChoice === "paper") {
-            console.log("You throw " + humanChoice + ", you filth.")
+            document.getElementById("playerText").innerHTML = ("You throw " + humanChoice + ", you filth.")
         } else if (humanChoice === "scissors") {
-            console.log("You throw " + humanChoice + ".")
+            document.getElementById("playerText").innerHTML = ("You throw " + humanChoice + ".")
         } else if (humanChoice === "gun") {
-            console.log("Not today you cheating slime.")
+            document.getElementById("playerText").innerHTML = ("Not today you cheating slime.")
         } else {
-            console.log("Nope. Gotta write 'rock', 'paper', or 'scissors'. Try again.")
+            document.getElementById("playerText").innerHTML = ("Nope. Gotta write 'rock', 'paper', or 'scissors'. Try again.")
         }
         return humanChoice;
     }
@@ -50,61 +55,79 @@
         }
         
         computerChoice = choices[getRandomInt(3)];
-        console.log("Your opponent throws " + computerChoice);
+        document.getElementById("oppText").innerHTML = ("Your opponent throws " + computerChoice);
         return computerChoice;
     }
 
     function playGame(string) {
-        humanChoice = string;
-        getHumanChoice();
-        getComputerChoice();
-        playRound(humanChoice , computerChoice);
+        if (humanScore < 5 && computerScore < 5) {
+            humanChoice = string;
+            getHumanChoice();
+            getComputerChoice();
+            playRound(humanChoice , computerChoice);
+        }
+
+        if (humanScore >= 5 || computerScore >= 5) {
+            declareWinner();
+        }
     }
 
-    function repeat(func , times) {
-        func();
-        times && --times && repeat (func , times);
-    }
+    // function repeat(func , times) {
+    //     func();
+    //     times && --times && repeat (func , times);
+    // }
      
     function playRound(humanChoice , computerChoice) {
         if(humanChoice === "rock") {
             if (computerChoice === "rock") {
                 humanScore++;
                 computerScore++;
-                console.log("Kings, the both of you.")
+                document.getElementById("result").innerHTML = ("Kings, the both of you.")
             } else if (computerChoice === "scissors") {
                 humanScore++;
-                console.log("You win. As you should.")
+                document.getElementById("result").innerHTML = ("You win. As you should.")
             } else if (computerChoice === "paper") {
                 computerScore ++;
-                console.log("You die with your honor.")
+                document.getElementById("result").innerHTML = ("You die with your honor.")
             }
         } else if (humanChoice === "paper") {
             if (computerChoice === "paper") {
                 humanScore--;
                 computerScore--;
-                console.log("You rats. You deserve each other.")
+                document.getElementById("result").innerHTML = ("You rats. You deserve each other.")
             } else if (computerChoice === "rock") {
                 humanScore++;
-                console.log("Take your victory, and live as a coward.")
+                document.getElementById("result").innerHTML = ("Take your victory, and live as a coward.")
             } else if (computerChoice === "scissors") {
                 computerScore++;
-                console.log("It's no more than you deserve.")
+                document.getElementById("result").innerHTML = ("It's no more than you deserve.")
             }
         } else if (humanChoice === "scissors") {
             if (computerChoice === "scissors") {
-                console.log("You tie.")
+                document.getElementById("result").innerHTML = ("You tie.")
             }
             if (computerChoice === "paper") {
                 humanScore++;
-                console.log("Another one bites the dust.")
+                document.getElementById("result").innerHTML = ("Another one bites the dust.")
             } else if (computerChoice === "rock") {
                 computerScore++;
-                console.log("You fool. Rock reigns supreme.")
+                document.getElementById("result").innerHTML = ("You fool. Rock reigns supreme.")
             }
         }
 
-        console.log("You: " + humanScore + ", Computer: " + computerScore)
+        document.getElementById("score").innerHTML = ("You: " + humanScore + ", Computer: " + computerScore)
+    }
+
+    function declareWinner() {
+        if (humanScore > computerScore) {
+            document.getElementById("winner").innerHTML = ("YOU WIN!")
+        }
+        else if (humanScore < computerScore) {
+            document.getElementById("winner").innerHTML = ("YOU LOSE!")
+        }
+        else if (humanScore = computerScore) {
+            document.getElementById("winner").innerHTML = ("IT'S A TIE!")
+        }
     }
   </script>
 </body>
